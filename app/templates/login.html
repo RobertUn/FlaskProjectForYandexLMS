@@ -1,23 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Авторизация{% endblock %}
 {% block content %}
-<h2>Login</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <div class="mb-3">
-        {{ form.username.label(class="form-label") }}
-        {{ form.username(class="form-control") }}
-        {% if form.username.errors %}
-            <div class="text-danger">{{ form.username.errors[0] }}</div>
-        {% endif %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h2 class="text-center mb-4">Авторизация</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control") }}
+                    {% if form.username.errors %}
+                        <div class="alert alert-danger mt-2">{{ form.username.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control") }}
+                    {% if form.password.errors %}
+                        <div class="alert alert-danger mt-2">{{ form.password.errors[0] }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary w-100 btn-custom">Войти</button>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-        {{ form.password.label(class="form-label") }}
-        {{ form.password(class="form-control") }}
-        {% if form.password.errors %}
-            <div class="text-danger">{{ form.password.errors[0] }}</div>
-        {% endif %}
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</div>
 {% endblock %}

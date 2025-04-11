@@ -40,13 +40,8 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)  # Создаем сессию пользователя
             flash('Вы успешно вошли!', 'success')
-            return redirect(url_for('dashboard'))  # Перенаправляем в личный кабинет
+            return redirect(url_for('main.generate'))  # Перенаправляем в личный кабинет
         else:
             flash('Неверный логин или пароль!', 'error')
 
     return render_template('login.html', form=form)
-
-
-@auth_bp.route('/')  # Или создайте отдельный Blueprint для главной страницы
-def home():
-    return "Добро пожаловать! Перейдите на /auth/login или /auth/register"

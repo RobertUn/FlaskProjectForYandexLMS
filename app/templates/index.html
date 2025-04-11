@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="card p-4 mb-4">
+            <h1 class="mb-4">Генератор сертификатов из CSV</h1>
+            <p class="lead mb-4">Проект разработан учеником 10 класса <strong>Юн Роберт Андреевич</strong></p>
+            <p>Программа позволяет загружать CSV-таблицы и автоматически создавать сертификаты на основе данных.</p>
+            
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mt-4">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg px-4 btn-custom">Авторизация</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary btn-lg px-4 btn-custom">Регистрация</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

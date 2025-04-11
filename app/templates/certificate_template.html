@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сертификат об окончании курса</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .certificate {
+            width: 800px;
+            height: 600px;
+            background-color: white;
+            border: 15px solid #2c3e50;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .header p {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin: 10px 0 0;
+        }
+        .content {
+            margin: 40px 0;
+        }
+        .student-name {
+            font-size: 32px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 20px 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .course-name {
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 15px 0;
+        }
+        .details {
+            margin: 30px 0;
+            font-size: 18px;
+            color: #34495e;
+        }
+        .footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature {
+            width: 200px;
+            border-top: 1px solid #2c3e50;
+            padding-top: 5px;
+        }
+        .serial-number {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <div class="header">
+            <h1>Сертификат</h1>
+            <p>Настоящий документ удостоверяет, что</p>
+        </div>
+
+        <div class="content">
+            <div class="student-name">{{ student_name }}</div>
+            <div class="course-name">успешно завершил(а) курс</div>
+            <div class="course-name" style="color: #3498db;">"{{ course_name }}"</div>
+        </div>
+
+        <div class="details">
+            <p>Преподаватель: <strong>{{ teacher_name }}</strong></p>
+            <p>Дата выдачи: <strong>{{ issue_date }}</strong></p>
+        </div>
+
+        <div class="footer">
+            <div class="signature">
+                <p>Подпись преподавателя</p>
+            </div>
+            <div class="signature">
+                <p>Подпись директора</p>
+            </div>
+        </div>
+
+        <div class="serial-number">
+            Серийный номер: {{ serial_number }}
+        </div>
+    </div>
+</body>
+</html>

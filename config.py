@@ -12,12 +12,11 @@ class Config:
 
     # Настройки БД (SQLite по умолчанию)
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'sqlite:///app.db'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Отключаем ненужные уведомления
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Папка для загрузки CSV
     UPLOAD_FOLDER = 'app/static/uploads'
     ALLOWED_EXTENSIONS = {'csv'}
 
 
-# Создаём объект конфигурации для импорта в Flask
 config = Config()
