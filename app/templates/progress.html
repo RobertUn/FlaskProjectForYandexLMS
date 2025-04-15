@@ -1,0 +1,85 @@
+<div class="container mt-5">
+    <h2>Генерация сертификатов</h2>
+    <div class="progress mb-3" style="height: 30px;">
+        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+             role="progressbar" style="width: 0%">
+            <span id="progressText" class="fs-6 fw-bold">0%</span>
+        </div>
+    </div>
+
+    <div id="errorDiv" class="alert alert-danger d-none" role="alert"></div>
+
+    <a id="downloadBtn" href="#" class="btn btn-success d-none">
+        <i class="bi bi-download me-2"></i>Скачать сертификаты
+    </a>
+
+    <div class="mt-3 text-muted small">
+        ID задачи: <code id="taskId">{{ task_id }}</code>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const taskId = "{{ task_id }}";
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const errorDiv = document.getElementById('errorDiv');
+    const taskIdElement = document.getElementById('taskId');
+
+    // Для отладки
+    console.log(`Starting progress tracking for task: ${taskId}`);
+    taskIdElement.textContent = taskId;
+
+    function updateProgress() {
+        fetch(`/progress/status/${taskId}`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Ошибка сервера: ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log('Progress update:', data);
+
+                const progress = Math.max(0, Math.min(100, data.progress || 0));
+
+                // Всегда обновляем прогресс
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `${progress}%`;
+
+                if (data.status === 'processing') {
+                    // Продолжаем опрос с разной частотой
+                    const delay = progress < 70 ? 300 : 500;
+                    setTimeout(updateProgress, delay);
+
+                } else if (data.status === 'done') {
+                    // Финальное состояние
+                    progressBar.classList.remove('progress-bar-animated');
+                    progressBar.classList.add('bg-success');
+                    downloadBtn.classList.remove('d-none');
+
+                } else if (data.status === 'error') {
+                    // Ошибка
+                    progressBar.classList.remove('progress-bar-animated');
+                    progressBar.classList.add('bg-danger');
+                    if (errorDiv) {
+                        errorDiv.textContent = data.message || 'Произошла ошибка при генерации';
+                        errorDiv.classList.remove('d-none');
+                    }
+                } else {
+                    // Неизвестный статус - повторяем
+                    setTimeout(updateProgress, 1000);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching progress:', error);
+                progressText.textContent = 'Подключение...';
+                setTimeout(updateProgress, 1000);
+            });
+    }
+
+    // Запускаем отслеживание
+    updateProgress();
+});
+</script>
