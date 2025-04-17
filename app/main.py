@@ -1,4 +1,3 @@
-# main.py
 import logging
 import os
 import uuid
@@ -180,42 +179,41 @@ def get_progress(task_id):
 @login_required
 def download(task_id):
     with progress_lock:
-        if task_id not in progress_status or progress_status[task_id]['status'] != 'done':
-            abort(404)
+        if task_id not in progress_status:
+            abort(404, description="Task not found")
 
         status = progress_status[task_id]
 
-        if status.get('in_memory'):
-            # Генерируем архив заново для скачивания
-            generator = CSVCertificateGenerator(status['original_csv'], current_app._get_current_object())
-            result = generator._generate_in_memory()
-            file_data = result['data']
-        else:
-            file_path_or_data = status['file_path']
+        if status['status'] != 'done':
+            abort(400, description="Certificates are not ready yet")
 
-        @after_this_request
-        def cleanup(response):
-            try:
-                if not status.get('in_memory') and os.path.exists(status['file_path']):
+    @after_this_request
+    def cleanup(response):
+        try:
+            if not status.get('in_memory') and 'file_path' in status:
+                if os.path.exists(status['file_path']):
                     os.remove(status['file_path'])
-                if os.path.exists(status['original_csv']):
-                    os.remove(status['original_csv'])
-                with progress_lock:
-                    progress_status.pop(task_id, None)
-            except Exception as e:
-                logger.error(f"Ошибка при очистке для задачи {task_id}: {str(e)}")
-            return response
+            if 'original_csv' in status and os.path.exists(status['original_csv']):
+                os.remove(status['original_csv'])
+            with progress_lock:
+                progress_status.pop(task_id, None)
+        except Exception as e:
+            logger.error(f"Cleanup error: {str(e)}")
+        return response
 
-        if status.get('in_memory'):
-            return send_file(
-                file_data,
-                as_attachment=True,
-                download_name='certificates.zip',
-                mimetype='application/zip'
-            )
-        else:
-            return send_file(
-                file_path_or_data,
-                as_attachment=True,
-                download_name='certificates.zip'
-            )
+    if status.get('in_memory'):
+        return send_file(
+            BytesIO(status['file_data']),
+            as_attachment=True,
+            download_name='certificates.zip',
+            mimetype='application/zip'
+        )
+    else:
+        if not os.path.exists(status['file_path']):
+            abort(404, description="File not found")
+
+        return send_file(
+            status['file_path'],
+            as_attachment=True,
+            download_name='certificates.zip'
+        )

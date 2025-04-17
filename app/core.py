@@ -4,7 +4,7 @@ from io import BytesIO
 from typing import Union
 
 import pandas as pd
-from flask import render_template, send_file
+from flask import render_template
 from xhtml2pdf import pisa
 
 
@@ -25,7 +25,21 @@ class CSVCertificateGenerator:
         with self.app.app_context():
             html_content = render_template('certificate.html', **template_data)
             pdf = BytesIO()
-            pisa.CreatePDF(html_content, dest=pdf)
+
+            # Добавляем дополнительные параметры для pisa
+            pisa_status = pisa.CreatePDF(
+                html_content,
+                dest=pdf,
+                encoding='UTF-8',
+                default_css='''
+                    @page { size: A4 landscape; margin: 0; }
+                    body { font-family: "Helvetica"; margin: 0; }
+                '''
+            )
+
+            if pisa_status.err:
+                raise RuntimeError("PDF generation failed")
+
             return pdf.getvalue()
 
     def _get_filename(self, record: dict) -> str:
