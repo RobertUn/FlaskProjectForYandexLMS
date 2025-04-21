@@ -11,7 +11,8 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY') or 'default-key-if-not-set'
 
     # Настройки БД (SQLite по умолчанию)
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'sqlite:///app.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace("postgres://", "postgresql://",
+                                                                         1) or 'sqlite:///app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Папка для загрузки CSV

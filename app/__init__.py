@@ -1,9 +1,9 @@
 from flask import Flask
-from flask_login import LoginManager
-from flask_sqlalchemy import SQLAlchemy
+
+from app.api import api_bp  # Добавьте этот импорт
 from app.auth import auth_bp
-from app.main import main_bp
 from app.extensions import db, login_manager
+from app.main import main_bp
 
 
 def create_app():
@@ -16,10 +16,9 @@ def create_app():
     # Регистрируем Blueprint
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(api_bp, url_prefix='/api')  # Добавьте эту строку
 
     with app.app_context():
-        db.create_all()  # Создаст таблицы при первом запуске
+        db.create_all()
 
     return app
-
-
