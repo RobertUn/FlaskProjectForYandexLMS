@@ -1,0 +1,101 @@
+student_name,course_name,teacher_name,issue_date,serial_number
+Sergei Orlov,Mathematics,Elena Volkova,2023-07-10,SN121
+Olga Belyaeva,Physics,Alexander Belov,2023-08-15,SN122
+Ivan Kuznetsov,Computer Science,Mikhail Orlov,2023-09-20,SN123
+Ekaterina Morozova,Art History,Svetlana Morozova,2023-10-25,SN124
+Dmitry Sokolov,Economics,Dmitry Sokolov,2023-11-30,SN125
+Anna Voronova,Geography,Anna Kuznetsova,2023-12-05,SN126
+Pavel Ivanov,Philosophy,Pavel Volkov,2024-01-10,SN127
+Sofia Petrova,Psychology,Olga Petrova,2024-02-15,SN128
+Nikita Smirnov,Sociology,Igor Nikolaev,2024-03-20,SN129
+Maria Kozlova,Foreign Languages,Ksenia Ivanova,2024-04-25,SN130
+Artem Vorobyov,Physical Education,Vladimir Lebedev,2024-05-30,SN131
+Daria Fedorova,Music,Yulia Fomina,2024-06-05,SN132
+Sergei Pavlov,Law,Artem Zaitsev,2024-07-10,SN133
+Alina Volkova,Medicine,Nadezhda Sorokina,2024-08-15,SN134
+Vladimir Orlov,Engineering,Roman Tikhonov,2024-09-20,SN135
+Ekaterina Belyakova,Journalism,Larisa Pavlova,2024-10-25,SN136
+Igor Sokolov,Marketing,Sergei Makarov,2024-11-30,SN137
+Natalia Morozova,Finance,Anastasia Voronova,2024-12-05,SN138
+Mikhail Karpov,Design,Kirill Gorbachev,2025-01-10,SN139
+Dmitry Voronin,Statistics,Elena Kozlova,2025-02-15,SN140
+Anna Zimina,Theater,Daria Romanova,2025-03-20,SN141
+Pavel Kozlov,Political Science,Maxim Antonov,2025-04-25,SN142
+Sofia Ivanova,Linguistics,Alina Karpova,2025-05-30,SN143
+Nikita Belyakov,Anthropology,Andrei Belyakov,2025-06-05,SN144
+Maria Semyonova,Archaeology,Viktoria Dmitrieva,2025-07-10,SN145
+Artem Volkova,Astronomy,Ivan Sorokin,2025-08-15,SN146
+Daria Orlova,Biotechnology,Maria Gromova,2025-09-20,SN147
+Sergei Morozov,Robotics,Dmitry Frolov,2025-10-25,SN148
+Alina Krylova,Genetics,Ekaterina Burova,2025-11-30,SN149
+Vladimir Smirnov,Nanotechnology,Pavel Kiselev,2025-12-05,SN150
+Ekaterina Vorobyova,Data Science,Sofia Orlova,2026-01-10,SN151
+Igor Ivanov,Artificial Intelligence,Nikita Volkov,2026-02-15,SN152
+Natalia Pavlova,Cybersecurity,Anna Semyonova,2026-03-20,SN153
+Mikhail Sokolov,Game Design,Artyom Voronin,2026-04-25,SN154
+Dmitry Fedorov,Digital Marketing,Yana Lebedeva,2026-05-30,SN155
+Anna Morozova,Blockchain,Denis Kruglov,2026-06-05,SN156
+Pavel Belyaev,Quantum Computing,Valentina Zimina,2026-07-10,SN157
+Sofia Kozlova,Cloud Computing,Gleb Sokolov,2026-08-15,SN158
+Nikita Voronin,UI/UX Design,Lidia Morozova,2026-09-20,SN159
+Maria Orlova,DevOps,Vadim Petrov,2026-10-25,SN160
+Artem Petrov,Big Data,Elena Smirnova,2026-11-30,SN161
+Daria Smirnova,Machine Learning,Igor Pavlov,2026-12-05,SN162
+Sergei Karpov,Network Security,Natalia Ivanova,2027-01-10,SN163
+Alina Vorobyova,Cryptography,Mikhail Fedorov,2027-02-15,SN164
+Vladimir Kozlov,Ethical Hacking,Daria Kozlova,2027-03-20,SN165
+Ekaterina Semyonova,Web Development,Sergei Vorobyov,2027-04-25,SN166
+Igor Morozov,Mobile Development,Alina Popova,2027-05-30,SN167
+Natalia Volkova,Database Management,Artem Orlov,2027-06-05,SN168
+Mikhail Belyakov,Software Testing,Viktoria Belyaeva,2027-07-10,SN169
+Dmitry Pavlov,Embedded Systems,Ivan Gusev,2027-08-15,SN170
+Anna Orlova,Computer Graphics,Maria Volkova,2027-09-20,SN171
+Pavel Fedorov,Augmented Reality,Dmitry Semyonov,2027-10-25,SN172
+Sofia Morozova,Virtual Reality,Ekaterina Krylova,2027-11-30,SN173
+Nikita Ivanov,3D Modeling,Pavel Frolov,2027-12-05,SN174
+Maria Krylova,Animation,Sofia Morozova,2028-01-10,SN175
+Artem Sokolov,Film Production,Nikita Vorobyov,2028-02-15,SN176
+Daria Voronova,Photography,Anna Pavlova,2028-03-20,SN177
+Sergei Belyaev,Creative Writing,Artyom Ivanov,2028-04-25,SN178
+Alina Kozlova,Public Speaking,Yana Sokolova,2028-05-30,SN179
+Vladimir Petrov,Leadership,Denis Kozlov,2028-06-05,SN180
+Ekaterina Ivanova,Project Management,Valentina Volkova,2028-07-10,SN181
+Igor Vorobyov,Business Analytics,Gleb Orlov,2028-08-15,SN182
+Natalia Smirnova,Entrepreneurship,Lidia Belyakova,2028-09-20,SN183
+Mikhail Morozov,Human Resources,Vadim Smirnov,2028-10-25,SN184
+Dmitry Karpov,Logistics,Elena Petrova,2028-11-30,SN185
+Anna Sokolova,Supply Chain,Igor Karpov,2028-12-05,SN186
+Pavel Orlov,International Business,Natalia Voronova,2029-01-10,SN187
+Sofia Vorobyova,Corporate Law,Mikhail Sokolov,2029-02-15,SN188
+Nikita Morozov,Taxation,Daria Fedorova,2029-03-20,SN189
+Maria Pavlova,Auditing,Sergei Dmitriev,2029-04-25,SN190
+Artem Ivanov,Insurance,Alina Vorobyova,2029-05-30,SN191
+Daria Kozlova,Real Estate,Artem Kozlov,2029-06-05,SN192
+Sergei Smirnov,Banking,Viktoria Pavlova,2029-07-10,SN193
+Alina Belyakova,Investment,Ivan Morozov,2029-08-15,SN194
+Vladimir Voronin,Stock Market,Maria Belyaeva,2029-09-20,SN195
+Ekaterina Karpova,Financial Planning,Dmitry Volkova,2029-10-25,SN196
+Igor Semyonov,Accounting,Ekaterina Orlova,2029-11-30,SN197
+Natalia Orlova,Econometrics,Pavel Ivanov,2029-12-05,SN198
+Mikhail Kozlov,Statistics,Sofia Karpova,2030-01-10,SN199
+Dmitry Morozov,Data Analysis,Nikita Smirnov,2030-02-15,SN200
+Anna Vorobyova,Market Research,Anna Voronova,2030-03-20,SN201
+Pavel Belyakov,Consumer Behavior,Artyom Petrov,2030-04-25,SN202
+Sofia Sokolova,Brand Management,Daria Smirnova,2030-05-30,SN203
+Nikita Karpov,Advertising,Sergei Karpov,2030-06-05,SN204
+Maria Voronova,Public Relations,Alina Vorobyova,2030-07-10,SN205
+Artem Smirnov,Social Media,Vladimir Kozlov,2030-08-15,SN206
+Daria Ivanova,Content Marketing,Ekaterina Semyonova,2030-09-20,SN207
+Sergei Orlov,SEO,Igor Morozov,2030-10-25,SN208
+Alina Morozova,Digital Strategy,Natalia Volkova,2030-11-30,SN209
+Vladimir Belyaev,Influencer Marketing,Mikhail Belyakov,2030-12-05,SN210
+Ekaterina Pavlova,Media Planning,Dmitry Pavlov,2031-01-10,SN211
+Igor Kozlov,Journalism,Anna Orlova,2031-02-15,SN212
+Natalia Ivanova,Broadcasting,Pavel Fedorov,2031-03-20,SN213
+Mikhail Vorobyov,Film Studies,Sofia Morozova,2031-04-25,SN214
+Dmitry Semyonov,Creative Writing,Nikita Ivanov,2031-05-30,SN215
+Anna Krylova,Screenwriting,Maria Krylova,2031-06-05,SN216
+Pavel Volkova,Theater Directing,Artem Sokolov,2031-07-10,SN217
+Sofia Belyakova,Acting,Daria Voronova,2031-08-15,SN218
+Nikita Smirnov,Music Production,Sergei Belyaev,2031-09-20,SN219
+Maria Orlova,Sound Design,Alina Kozlova,2031-10-25,SN220
