@@ -4,6 +4,7 @@ import uuid
 import zipfile
 from io import BytesIO
 from threading import Lock, Thread
+import shutil
 
 import pandas as pd
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, send_file, \
@@ -27,6 +28,12 @@ def home():
 
 def generate_certificates_background(temp_path, task_id, app):
     try:
+        # Создаем специальную временную директорию
+        temp_dir = os.path.join(app.config['UPLOAD_FOLDER'], 'temp_certs')
+        os.makedirs(temp_dir, exist_ok=True)
+
+        zip_path = os.path.join(temp_dir, f'certs_{task_id}.zip')  # Используем абсолютный путь
+
         # Инициализация прогресса
         with progress_lock:
             progress_status[task_id] = {
@@ -60,7 +67,7 @@ def generate_certificates_background(temp_path, task_id, app):
             with progress_lock:
                 progress_status[task_id].update({
                     'status': 'done',
-                    'file_data': zip_buffer.getvalue(),
+                    'file_path': zip_path,  # Сохраняем абсолютный путь
                     'progress': 100
                 })
         else:
@@ -179,41 +186,56 @@ def get_progress(task_id):
 @login_required
 def download(task_id):
     with progress_lock:
-        if task_id not in progress_status:
-            abort(404, description="Task not found")
+        status = progress_status.get(task_id)
+        if not status or status['status'] != 'done':
+            abort(404, description="Файл не найден или еще не готов")
 
-        status = progress_status[task_id]
-
-        if status['status'] != 'done':
-            abort(400, description="Certificates are not ready yet")
-
-    @after_this_request
-    def cleanup(response):
-        try:
-            if not status.get('in_memory') and 'file_path' in status:
-                if os.path.exists(status['file_path']):
-                    os.remove(status['file_path'])
-            if 'original_csv' in status and os.path.exists(status['original_csv']):
-                os.remove(status['original_csv'])
-            with progress_lock:
-                progress_status.pop(task_id, None)
-        except Exception as e:
-            logger.error(f"Cleanup error: {str(e)}")
-        return response
-
+    # Для in-memory файлов
     if status.get('in_memory'):
+        try:
+            return send_file(
+                BytesIO(status['file_data']),
+                as_attachment=True,
+                download_name='certificates.zip',
+                mimetype='application/zip'
+            )
+        except Exception as e:
+            current_app.logger.error(f"Ошибка отправки in-memory файла: {str(e)}")
+            abort(500, description="Ошибка подготовки файла")
+
+    # Для файлов на диске
+    file_path = os.path.abspath(status['file_path']) if 'file_path' in status else None
+
+    if not file_path or not os.path.exists(file_path):
+        current_app.logger.error(f"Файл не найден: {file_path}")
+        abort(404, description="Файл сертификатов не найден")
+
+    try:
+        # Читаем файл в память и отправляем
+        with open(file_path, 'rb') as f:
+            file_data = BytesIO(f.read())
+
+        @after_this_request
+        def cleanup(response):
+            try:
+                if file_path and os.path.exists(file_path):
+                    os.remove(file_path)
+                if 'original_csv' in status and os.path.exists(status['original_csv']):
+                    os.remove(status['original_csv'])
+                with progress_lock:
+                    if task_id in progress_status:
+                        del progress_status[task_id]
+            except Exception as e:
+                current_app.logger.error(f"Ошибка очистки: {str(e)}")
+            return response
+
         return send_file(
-            BytesIO(status['file_data']),
+            file_data,
             as_attachment=True,
             download_name='certificates.zip',
             mimetype='application/zip'
         )
-    else:
-        if not os.path.exists(status['file_path']):
-            abort(404, description="File not found")
 
-        return send_file(
-            status['file_path'],
-            as_attachment=True,
-            download_name='certificates.zip'
-        )
+    except Exception as e:
+        current_app.logger.error(f"Ошибка чтения файла {file_path}: {str(e)}")
+        abort(500, description="Ошибка при чтении файла")

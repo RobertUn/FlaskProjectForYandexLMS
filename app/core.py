@@ -6,7 +6,10 @@ from typing import Union
 import pandas as pd
 from flask import render_template
 from xhtml2pdf import pisa
+import logging
 
+xhtml2pdf_logger = logging.getLogger('xhtml2pdf')
+xhtml2pdf_logger.setLevel(logging.ERROR)
 
 class CSVCertificateGenerator:
     """Генератор сертификатов из CSV с использованием xhtml2pdf"""
